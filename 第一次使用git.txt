@@ -1,0 +1,15 @@
+仓库地址：https://github.com/jmisxiaofeixia/test2 
+命令顺序：桌面上新建一个文件夹，进入文件夹右键点击git bash here进入git命令
+git init
+在文件夹创建了两个名为‘1.py’‘2.py’的文件
+git status
+git add --all
+git status
+git commit -m "first commit"
+ git add README.md
+git remote add origin https://github.com/jmisxiaofeixia/test2.git
+ git push -u origin master
+ git rm 1.py -r
+ git add .
+git commit -m "clear"
+ git push origin master
