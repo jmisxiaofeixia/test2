@@ -1,0 +1,96 @@
+mysql> create table user(
+    -> id int(5) primary key,
+    -> name varchar(20),
+    -> password varchar(20) not null
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table accout(
+    -> id int(5) primary key,
+    -> accoutname varchar(20),
+    -> password varchar(20) not null
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table user_accout(
+    -> user_id int,
+    -> accout_id int,
+    -> foreign key (user_id) references user(id),
+    -> foreign key (accout_id) references accout(id)
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> insert into user values(10000,'钢铁侠','gangtiexia');
+Query OK, 1 row affected (0.11 sec)
+
+mysql> insert into user values(10001,'美国队长','meiguoduizhang');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into user values(10002,'鹰眼','yingyan');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into user values(10003,'雷神','leishen');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into user values(10004,'黑寡妇','heiguafu');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into user values(10005,'惊奇队长','jingqiduizhang');
+Query OK, 1 row affected (0.30 sec)
+
+mysql> insert into accout values(20000,'地球人','diqiuren');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into accout values(20001,'复仇者联盟1','fuchouzhelianmeng1');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into user_accout values(10000,20000);
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into user_accout values(10001,20000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into user_accout values(10002,20000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into user_accout values(10004,20000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into user_accout values(10005,20000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into user_accout values(10000,20001);
+Query OK, 1 row affected (0.30 sec)
+
+mysql> insert into user_accout values(10001,20001);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into user_accout values(10002,20001);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into user_accout values(10003,20001);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into user_accout values(10004,20001);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> create table post(
+    -> id int(5) primary key not null,
+    -> content varchar(200),
+    -> user_id int,
+    ->  foreign key (user_id) references user(id),
+    -> FULLTEXT(content)
+    -> )ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+
+
+mysql> insert into post values(30002,'我是 珙玺科技 开发组 的成员之一',10004);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into post values(30006,'珙玺科技 开发组 的成员喜欢 唱，跳，rap',10004);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into post values(30005,'我是珙玺 科技开发 组的成员',10003);
+Query OK, 1 row affected (0.00 sec)
+
+select * from post where match (content) against ('珙玺科技*' in boolean mode);
+
